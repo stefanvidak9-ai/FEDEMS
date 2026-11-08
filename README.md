@@ -18,18 +18,18 @@ The project is organized into research phases:
 - Phase 7, Steps 35–40: Raspberry Pi infrastructure, owned here.
 - Phase 8: future Flower/FedAvg federated learning.
 
-Step 30 is implemented. Its persistence and weekly seasonal-naive baselines,
-CSV contract, metrics, and commands are documented in
-[docs/phase6/step30_baselines.md](docs/phase6/step30_baselines.md). No CNN,
-training, federated-learning, or Raspberry Pi deployment implementation is
-included yet.
+Steps 30 and 31 are implemented: Step 30 provides persistence and weekly
+seasonal-naive baselines; Step 31 adds a compact configurable PyTorch 1D-CNN
+architecture. See [Step 30 documentation](docs/phase6/step30_baselines.md) and
+[Step 31 documentation](docs/phase6/step31_cnn.md). CNN training,
+federated-learning, and Raspberry Pi deployment are not implemented yet.
 
 ## Repository Layout
 
 - `Dataset/`: supplied COFACTOR-Residential Dataset 1 files; source data is
   kept unchanged.
 - `src/baselines/`: Step 30 lag-only forecasting and evaluation.
-- `src/models/`: future model architectures, including the 1D-CNN.
+- `src/models/`: reusable model architectures, including the Step 31 1D-CNN.
 - `src/training/`: future centralized and local model-training workflows.
 - `src/federated/`: future Flower/FedAvg integration (Phase 8).
 - `src/evaluation/`: shared evaluation and monitoring utilities.
@@ -37,7 +37,7 @@ included yet.
 - `configs/`: versioned, non-secret experiment configuration.
 - `experiments/`: reproducible experiment definitions and metadata.
 - `results/`: generated metrics and artifacts; generated files are ignored.
-- `tests/`: automated tests, including synthetic Step 30 examples.
+- `tests/`: automated tests, including synthetic Step 30 and Step 31 checks.
 - `docs/`: project, phase, and step documentation.
 
 See [docs/README.md](docs/README.md) for documentation navigation and phase
