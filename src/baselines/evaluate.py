@@ -69,8 +69,8 @@ def _metrics(actual: list[float], predicted: list[float]) -> dict[str, Any]:
 def evaluate_forecasts(rows: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
     """Return per-building and pooled metrics, grouped by split and baseline.
 
-    Missing targets or required lags are omitted for that baseline only. The
-    returned ``n`` makes any resulting difference in scored rows explicit.
+    A row is scored for both baselines only when its target and both required
+    lags are present. The returned ``n`` reports their shared sample size.
     """
     rows_by_split: dict[str, list[dict[str, Any]]] = defaultdict(list)
     seen_targets: set[tuple[str, date]] = set()
