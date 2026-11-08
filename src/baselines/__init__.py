@@ -1,0 +1,1 @@
+"""Simple forecasting baselines for FEDEMS."""

@@ -1,0 +1,6 @@
+building_id,target_date,actual_kwh,lag1_kwh,lag7_kwh,split,data_status
+6470,2024-01-08,10,8,7,validation,synthetic_example
+6470,2024-01-09,0,10,6,validation,synthetic_example
+6471,2024-01-08,14,12,10,validation,synthetic_example
+6470,2024-02-08,9,10,8,test,synthetic_example
+6471,2024-02-08,0,0,4,test,synthetic_example
