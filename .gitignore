@@ -1,0 +1,43 @@
+# Python bytecode and local caches. Existing tracked cache files remain tracked.
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Local secrets and machine-specific settings
+.env
+.env.*
+!.env.example
+*.pem
+*.p12
+*.pfx
+credentials*.json
+secrets*.json
+config.local.yaml
+config.local.yml
+
+# Generated results, model weights, and experiment artifacts
+results/*
+!results/README.md
+artifacts/
+checkpoints/
+runs/
+outputs/
+wandb/
+mlruns/
+tensorboard/
+*.pt
+*.pth
+*.ckpt
+*.onnx
