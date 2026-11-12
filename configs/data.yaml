@@ -1,0 +1,21 @@
+# Person A — COFACTOR Residential Dataset 1 (17 heating-centre clients)
+# All paths are relative to the FEDEMS repository root.
+raw_dir: Dataset
+daily_dir: Dataset/daily
+processed_dir: Dataset/processed
+reports_dir: docs/data_reports
+building_ids: [6479, 6480, 6481, 6482, 6483, 6484, 6485, 6486, 6487, 6488, 6489, 6490, 6491, 6492, 6493, 6494, 6495]
+features:
+  - HtSpace_kWh_day
+  - Tout_mean_C
+  - SolGlob_kWh_m2_day
+  - WindSpd_mean_m_s
+target: HtSpace_kWh_day
+historical_window_days: 7
+forecast_horizon_days: 1
+train_end: 2022-08-31
+validation_start: 2022-09-01
+validation_end: 2022-10-31
+test_start: 2022-11-01
+normalization: global_training_only_zscore
+common_target_dates: 307

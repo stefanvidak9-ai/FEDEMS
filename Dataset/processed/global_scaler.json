@@ -1,0 +1,27 @@
+{
+  "features": [
+    "HtSpace_kWh_day",
+    "Tout_mean_C",
+    "SolGlob_kWh_m2_day",
+    "WindSpd_mean_m_s"
+  ],
+  "target": "HtSpace_kWh_day",
+  "window_days": 7,
+  "forecast_horizon_days": 1,
+  "normalization": "global training-only z-score",
+  "feature_mean": [
+    421.26737301817275,
+    10.868314584393442,
+    4.345458640424098,
+    2.9067610953338217
+  ],
+  "feature_std": [
+    485.6770750647096,
+    7.026006671967213,
+    2.0771715762809366,
+    1.0367255315125714
+  ],
+  "target_mean": 395.67719211822657,
+  "target_std": 470.33878251916326,
+  "training_target_count": 3451
+}
