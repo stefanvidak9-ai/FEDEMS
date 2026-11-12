@@ -28,10 +28,11 @@ Aggregate metrics pool scored rows across buildings (micro-average).
 
 When starting from daily observations with `building_id`, `target_date`, and
 `actual_kwh`, `derive_lags` creates exact calendar-day lags. It keeps buildings
-separate and uses only observations dated before each target. An adapter for
-the later processed NPZ data can map confirmed arrays into these fields; no NPZ
-keys, normalization, or aggregation rules are assumed here. The hourly source
-files are not read or transformed by these baselines.
+separate and uses only observations dated before each target. The Step 32–34
+runner adapts the finalized Phase 5 seven-day windows to the same evaluator:
+the first and last historical target-feature values are lag 7 and lag 1,
+respectively, and the target and lag values are inverse-scaled to kWh/day. The
+baseline code does not read or transform hourly source files.
 
 ## Install, Test, and Run
 
@@ -47,7 +48,8 @@ Do not use these metrics as COFACTOR findings.
 
 ## Comparing with the CNN
 
-The future CNN adapter and this evaluator must use the same building/client
-IDs, target dates, validation/test split, target units, and missing-target
-policy. Score models on matching rows and report scored sample counts. The
-baselines do not implement a CNN, Flower, or federated training.
+The Step 32–34 runs compare CNNs and baselines on the same building/client IDs,
+target dates, validation/test split, and kWh/day target values. Since valid
+Phase 5 windows have finite inputs and targets, all rows are eligible for both
+lag baselines and the comparison records their scored counts. The baselines do
+not implement Flower or federated training.
