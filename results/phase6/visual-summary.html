@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Visual summary of real COFACTOR Phase 6 CNN and baseline experiments.">
+  <title>FEDEMS Phase 6 Results</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1d2b36;
+      --muted: #61717c;
+      --line: #dce4e8;
+      --surface: #ffffff;
+      --canvas: #f3f6f7;
+      --accent: #286d83;
+      --accent-soft: #e6f0f3;
+      --baseline: #78909c;
+      --local: #588878;
+      --central: #286d83;
+      --warm: #ad7547;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--canvas);
+      color: var(--ink);
+      font: 15px/1.55 "Segoe UI", Arial, sans-serif;
+    }
+    main { width: min(1120px, calc(100% - 36px)); margin: 36px auto 64px; }
+    header { margin-bottom: 24px; }
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    h1 { margin: 0; font-size: clamp(28px, 4vw, 40px); line-height: 1.15; }
+    h2 { margin: 0 0 6px; font-size: 20px; line-height: 1.3; }
+    h3 { margin: 0 0 4px; font-size: 15px; }
+    p { margin: 8px 0 0; }
+    .intro { max-width: 760px; color: var(--muted); font-size: 16px; }
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 22px 0;
+    }
+    .fact, .panel, .chart-panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 9px;
+    }
+    .fact { padding: 14px 16px; }
+    .fact strong { display: block; font-size: 20px; line-height: 1.3; }
+    .fact span { color: var(--muted); font-size: 12px; }
+    .panel { padding: 20px; margin: 16px 0; }
+    .section-lead { color: var(--muted); margin: 0 0 14px; }
+    .flow {
+      display: grid;
+      grid-template-columns: 1fr auto 1.2fr auto 1.5fr auto 1fr;
+      align-items: stretch;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .flow-node {
+      display: flex;
+      min-height: 94px;
+      flex-direction: column;
+      justify-content: center;
+      padding: 13px;
+      background: #f8fafb;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+    }
+    .flow-node.primary { background: var(--accent-soft); border-color: #c9dce2; }
+    .flow-node small { color: var(--muted); line-height: 1.4; }
+    .arrow { align-self: center; color: var(--accent); font-size: 22px; }
+    .branches { display: grid; gap: 7px; }
+    .branch {
+      padding: 8px 10px;
+      border-left: 3px solid var(--accent);
+      background: #f8fafb;
+      border-radius: 3px;
+      font-size: 13px;
+    }
+    .branch.local { border-color: var(--local); }
+    .branch.base { border-color: var(--baseline); }
+    .chart-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .chart-panel { padding: 16px 14px 10px; min-width: 0; }
+    .chart-panel h3 { margin-left: 4px; }
+    .chart-panel .caption { margin: 2px 4px 8px; color: var(--muted); font-size: 12px; }
+    svg { display: block; width: 100%; height: auto; overflow: visible; }
+    svg text { fill: var(--ink); font-family: "Segoe UI", Arial, sans-serif; font-size: 12px; }
+    svg .tick { fill: var(--muted); font-size: 11px; }
+    svg .gridline { stroke: var(--line); stroke-width: 1; }
+    svg .axis { stroke: #8d9ba3; stroke-width: 1; }
+    .takeaway {
+      margin-top: 14px;
+      padding: 13px 15px;
+      border-left: 3px solid var(--warm);
+      background: #fbf8f4;
+      color: #4f463c;
+    }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { padding: 9px 10px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+    th:first-child, td:first-child { text-align: left; }
+    th { color: var(--muted); font-weight: 600; }
+    .note { color: var(--muted); font-size: 12px; }
+    .source { margin-top: 12px; color: var(--muted); font-size: 12px; }
+    @media (max-width: 760px) {
+      main { width: min(100% - 24px, 600px); margin-top: 22px; }
+      .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .flow { grid-template-columns: 1fr; }
+      .arrow { transform: rotate(90deg); }
+      .flow-node { min-height: 74px; }
+      .chart-grid { grid-template-columns: 1fr; }
+      .panel { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">FEDEMS · Phase 6 · Real-data runs</p>
+    <h1>From daily data to next-day forecasts</h1>
+    <p class="intro">
+      A visual guide to the Phase 6 experiments. All model runs use the real COFACTOR
+      Phase 5 windows; the synthetic data in the test suite was not used for these results.
+      Errors are reported in kWh/day, and lower is better.
+    </p>
+  </header>
+
+  <section class="facts" aria-label="Experiment summary">
+    <div class="fact"><strong>4 features</strong><span>Heating, temperature, solar, wind</span></div>
+    <div class="fact"><strong>7 days</strong><span>Complete history before each target</span></div>
+    <div class="fact"><strong>203 / 59 / 45</strong><span>Train / validation / test targets per building</span></div>
+    <div class="fact"><strong>6479–6482</strong><span>Buildings in the centralized/local comparison</span></div>
+  </section>
+
+  <section class="panel" aria-labelledby="workflow-title">
+    <h2 id="workflow-title">How the experiment works</h2>
+    <p class="section-lead">
+      Phase 4 daily values feed Phase 5 windows and chronological splits. Validation selects
+      the checkpoint; the untouched test split is used for final comparison.
+    </p>
+    <div class="flow" role="img" aria-label="Phase 4 daily data flows into Phase 5 seven-day windows and chronological train, validation, and test splits. Training branches into Step 32 single-building, Step 33 centralized, and Step 34 independent local CNNs. Validation selects checkpoints and test data is evaluated alongside Step 30 baselines.">
+      <div class="flow-node">
+        <strong>Phase 4</strong>
+        <small>Daily observations<br>COFACTOR buildings</small>
+      </div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="flow-node primary">
+        <strong>Phase 5</strong>
+        <small>7-day inputs · next-day target<br>Training-only global scaling</small>
+      </div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="branches">
+        <div class="branch"><strong>Step 32</strong> · CNN for building 6479</div>
+        <div class="branch"><strong>Step 33</strong> · one CNN trained centrally</div>
+        <div class="branch local"><strong>Step 34</strong> · one independent CNN per building</div>
+        <div class="branch base"><strong>Step 30</strong> · persistence and weekly-naive baselines</div>
+      </div>
+      <div class="arrow" aria-hidden="true">→</div>
+      <div class="flow-node">
+        <strong>Evaluate</strong>
+        <small>Select on validation<br>Report test MAE / RMSE</small>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="comparison-title">
+    <h2 id="comparison-title">Test-set comparison · four buildings</h2>
+    <p class="section-lead">
+      Buildings 6479–6482; 45 test targets each (180 pooled). CNNs use the same targets
+      and dates as the Step 30 baselines.
+    </p>
+    <div class="chart-grid">
+      <figure class="chart-panel">
+        <h3>Mean absolute error (MAE)</h3>
+        <p class="caption">Average absolute forecast error · kWh/day</p>
+        <svg viewBox="0 0 520 230" role="img" aria-labelledby="mae-title mae-desc">
+          <title id="mae-title">Aggregate test MAE by model</title>
+          <desc id="mae-desc">Persistence 53.58, centralized CNN 142.57, local CNN 163.78, weekly seasonal naive 228.11 kWh per day. Lower is better. Source: real COFACTOR Phase 5 test data, 2022-11-01 through 2022-12-21, 180 targets.</desc>
+          <text x="12" y="16">Model</text><text x="465" y="16">kWh/day</text>
+          <line class="axis" x1="152" y1="28" x2="152" y2="196"/>
+          <line class="axis" x1="152" y1="196" x2="472" y2="196"/>
+          <g>
+            <line class="gridline" x1="152" y1="28" x2="152" y2="196"/><text class="tick" x="152" y="214" text-anchor="middle">0</text>
+            <line class="gridline" x1="243" y1="28" x2="243" y2="196"/><text class="tick" x="243" y="214" text-anchor="middle">75</text>
+            <line class="gridline" x1="335" y1="28" x2="335" y2="196"/><text class="tick" x="335" y="214" text-anchor="middle">150</text>
+            <line class="gridline" x1="426" y1="28" x2="426" y2="196"/><text class="tick" x="426" y="214" text-anchor="middle">225</text>
+          </g>
+          <text x="142" y="55" text-anchor="end">Persistence</text>
+          <rect x="152" y="38" width="65.3" height="23" rx="3" fill="#78909c"/><text x="223" y="55">53.58</text>
+          <text x="142" y="96" text-anchor="end">Centralized CNN</text>
+          <rect x="152" y="79" width="173.9" height="23" rx="3" fill="#286d83"/><text x="332" y="96">142.57</text>
+          <text x="142" y="137" text-anchor="end">Local CNN</text>
+          <rect x="152" y="120" width="199.8" height="23" rx="3" fill="#588878"/><text x="358" y="137">163.78</text>
+          <text x="142" y="178" text-anchor="end">Weekly naive</text>
+          <rect x="152" y="161" width="278.3" height="23" rx="3" fill="#ad7547"/><text x="437" y="178">228.11</text>
+          <text class="tick" x="312" y="229" text-anchor="middle">MAE (kWh/day)</text>
+        </svg>
+        <p class="source">Source: Step 30/33/34 saved comparisons · Phase 5 test dates · n=180 per model.</p>
+      </figure>
+
+      <figure class="chart-panel">
+        <h3>Root mean squared error (RMSE)</h3>
+        <p class="caption">Larger errors count more · kWh/day</p>
+        <svg viewBox="0 0 520 230" role="img" aria-labelledby="rmse-title rmse-desc">
+          <title id="rmse-title">Aggregate test RMSE by model</title>
+          <desc id="rmse-desc">Persistence 80.13, centralized CNN 181.91, local CNN 202.62, weekly seasonal naive 289.72 kWh per day. Lower is better. Source: real COFACTOR Phase 5 test data, 2022-11-01 through 2022-12-21, 180 targets.</desc>
+          <text x="12" y="16">Model</text><text x="465" y="16">kWh/day</text>
+          <line class="axis" x1="152" y1="28" x2="152" y2="196"/>
+          <line class="axis" x1="152" y1="196" x2="472" y2="196"/>
+          <g>
+            <line class="gridline" x1="152" y1="28" x2="152" y2="196"/><text class="tick" x="152" y="214" text-anchor="middle">0</text>
+            <line class="gridline" x1="243" y1="28" x2="243" y2="196"/><text class="tick" x="243" y="214" text-anchor="middle">100</text>
+            <line class="gridline" x1="335" y1="28" x2="335" y2="196"/><text class="tick" x="335" y="214" text-anchor="middle">200</text>
+            <line class="gridline" x1="426" y1="28" x2="426" y2="196"/><text class="tick" x="426" y="214" text-anchor="middle">300</text>
+          </g>
+          <text x="142" y="55" text-anchor="end">Persistence</text>
+          <rect x="152" y="38" width="73.0" height="23" rx="3" fill="#78909c"/><text x="231" y="55">80.13</text>
+          <text x="142" y="96" text-anchor="end">Centralized CNN</text>
+          <rect x="152" y="79" width="165.5" height="23" rx="3" fill="#286d83"/><text x="324" y="96">181.91</text>
+          <text x="142" y="137" text-anchor="end">Local CNN</text>
+          <rect x="152" y="120" width="184.3" height="23" rx="3" fill="#588878"/><text x="343" y="137">202.62</text>
+          <text x="142" y="178" text-anchor="end">Weekly naive</text>
+          <rect x="152" y="161" width="263.4" height="23" rx="3" fill="#ad7547"/><text x="422" y="178">289.72</text>
+          <text class="tick" x="312" y="229" text-anchor="middle">RMSE (kWh/day)</text>
+        </svg>
+        <p class="source">Source: Step 30/33/34 saved comparisons · Phase 5 test dates · n=180 per model.</p>
+      </figure>
+    </div>
+    <div class="takeaway">
+      <strong>What this run says:</strong> persistence has the lowest test error; the centralized
+      CNN is better than the local CNN aggregate, but neither beats persistence here. This is
+      an observed result for this experiment configuration, not a general claim.
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="single-title">
+    <h2 id="single-title">Step 32 · one building</h2>
+    <p class="section-lead">
+      Building 6479 only; 45 test targets. Compare this CNN with the baselines for this same
+      building—not with the four-building aggregate above.
+    </p>
+    <div class="chart-grid">
+      <figure class="chart-panel">
+        <h3>Building 6479 test MAE</h3>
+        <p class="caption">Average absolute forecast error · kWh/day</p>
+        <svg viewBox="0 0 520 190" role="img" aria-labelledby="b6479-title b6479-desc">
+          <title id="b6479-title">Building 6479 test MAE by model</title>
+          <desc id="b6479-desc">Persistence 62.84, Step 32 CNN 188.04, weekly seasonal naive 245.38 kWh per day. Source: COFACTOR Phase 5 test data for building 6479, 45 targets.</desc>
+          <text x="12" y="16">Model</text>
+          <line class="axis" x1="152" y1="28" x2="152" y2="155"/>
+          <line class="axis" x1="152" y1="155" x2="472" y2="155"/>
+          <g>
+            <line class="gridline" x1="152" y1="28" x2="152" y2="155"/><text class="tick" x="152" y="174" text-anchor="middle">0</text>
+            <line class="gridline" x1="243" y1="28" x2="243" y2="155"/><text class="tick" x="243" y="174" text-anchor="middle">100</text>
+            <line class="gridline" x1="335" y1="28" x2="335" y2="155"/><text class="tick" x="335" y="174" text-anchor="middle">200</text>
+            <line class="gridline" x1="426" y1="28" x2="426" y2="155"/><text class="tick" x="426" y="174" text-anchor="middle">300</text>
+          </g>
+          <text x="142" y="56" text-anchor="end">Persistence</text>
+          <rect x="152" y="39" width="57.2" height="22" rx="3" fill="#78909c"/><text x="215" y="55">62.84</text>
+          <text x="142" y="96" text-anchor="end">Step 32 CNN</text>
+          <rect x="152" y="79" width="171.1" height="22" rx="3" fill="#286d83"/><text x="329" y="95">188.04</text>
+          <text x="142" y="136" text-anchor="end">Weekly naive</text>
+          <rect x="152" y="119" width="223.3" height="22" rx="3" fill="#ad7547"/><text x="381" y="135">245.38</text>
+          <text class="tick" x="312" y="189" text-anchor="middle">MAE (kWh/day)</text>
+        </svg>
+        <p class="source">Source: Step 32 and Step 30 results · Phase 5 test split · building 6479, n=45.</p>
+      </figure>
+      <div>
+        <h3>Step 32 scorecard</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Split</th><th>Targets</th><th>MAE</th><th>RMSE</th></tr></thead>
+            <tbody>
+              <tr><td>Validation</td><td>59</td><td>78.15</td><td>114.48</td></tr>
+              <tr><td>Test</td><td>45</td><td>188.04</td><td>226.15</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">All errors are kWh/day. The best checkpoint was selected using validation RMSE; test scores are reported after selection.</p>
+        <h3 style="margin-top:18px">How to read MAE and RMSE</h3>
+        <p><strong>MAE</strong> is the typical absolute error. <strong>RMSE</strong> increases more when a forecast misses by a large amount. Compare the same buildings and dates, and prefer lower values.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" aria-labelledby="building-title">
+    <h2 id="building-title">Test scores by building · Steps 33 and 34</h2>
+    <p class="section-lead">Per-building CNN errors show where the aggregate comparison comes from.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Building</th><th>Central MAE</th><th>Central RMSE</th><th>Local MAE</th><th>Local RMSE</th><th>Targets</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>6479</td><td>162.03</td><td>206.61</td><td>188.04</td><td>226.15</td><td>45</td></tr>
+          <tr><td>6480</td><td>138.66</td><td>175.03</td><td>151.78</td><td>187.62</td><td>45</td></tr>
+          <tr><td>6481</td><td>132.34</td><td>168.74</td><td>169.81</td><td>210.13</td><td>45</td></tr>
+          <tr><td>6482</td><td>137.25</td><td>174.84</td><td>145.50</td><td>183.62</td><td>45</td></tr>
+          <tr><td><strong>Pooled</strong></td><td><strong>142.57</strong></td><td><strong>181.91</strong></td><td><strong>163.78</strong></td><td><strong>202.62</strong></td><td><strong>180</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Pooled RMSE is computed from all test squared errors; it is not the average of the four building RMSE values.</p>
+  </section>
+
+  <p class="source">
+    Data contract: COFACTOR Residential Dataset 1, Phase 4 daily features and Phase 5
+    seven-day windows; target dates are the chronological Phase 5 test dates
+    (2022-11-01 to 2022-12-21). Values are from the saved Phase 6 metrics and comparison
+    files. Generated report; not a new experiment.
+  </p>
+</main>
+</body>
+</html>
