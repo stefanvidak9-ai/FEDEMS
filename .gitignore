@@ -26,6 +26,9 @@ credentials*.json
 secrets*.json
 config.local.yaml
 config.local.yml
+configs/raspberry-pi-hosts.local.json
+configs/raspberry-pi-hosts.local.yaml
+configs/raspberry-pi-hosts.local.yml
 
 # Generated results, model weights, and experiment artifacts
 results/*

@@ -24,6 +24,10 @@ Steps 32–34 train and evaluate single-building, centralized, and independent
 local CNN experiments. See the [Phase 6 guide](docs/phase6/README.md) for the
 confirmed feature/data contract and run commands. Flower/FedAvg is future
 work; Phase 7 covers Raspberry Pi infrastructure and runtime experiments.
+The initial two-client Phase 7 setup, including a TLS-authenticated physical
+Flower smoke round and CPU CNN checks on both selected Pis, is verified.
+Inventory and staged testing for the wider 17–18-device rollout remain future
+work. See the [Phase 7 guide](docs/phase7/README.md) for evidence and limits.
 
 ## Repository Layout
 
