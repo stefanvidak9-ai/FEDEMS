@@ -1,0 +1,16 @@
+[project]
+name = "fedems-flower-smoke"
+version = "0.1.0"
+description = "Communication-only Flower smoke test for FEDEMS Phase 7"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "flwr==1.43.0",
+    "numpy>=1.26,<3.0",
+]
+
+[tool.flwr.app]
+publisher = "fedems"
+
+[tool.flwr.app.components]
+serverapp = "server_app:app"
+clientapp = "client_app:app"

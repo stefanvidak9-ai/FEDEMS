@@ -1,0 +1,3 @@
+# Optional, isolated Flower runtime; does not alter Phase 6 requirements.
+flwr==1.43.0
+numpy>=1.26,<3

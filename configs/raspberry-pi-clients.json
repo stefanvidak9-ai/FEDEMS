@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "profiles": {
+    "2": [
+      {
+        "logical_client_id": "client-01",
+        "physical_pi_id": "node-52",
+        "host_status": "inventory-verified",
+        "building_id": 6479,
+        "data_path": "Dataset/processed/building_6479",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-02",
+        "physical_pi_id": "node-53",
+        "host_status": "inventory-verified",
+        "building_id": 6480,
+        "data_path": "Dataset/processed/building_6480",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      }
+    ],
+    "4": [
+      {
+        "logical_client_id": "client-01",
+        "physical_pi_id": "node-52",
+        "host_status": "inventory-verified",
+        "building_id": 6479,
+        "data_path": "Dataset/processed/building_6479",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-02",
+        "physical_pi_id": "node-53",
+        "host_status": "inventory-verified",
+        "building_id": 6480,
+        "data_path": "Dataset/processed/building_6480",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-03",
+        "physical_pi_id": "node-54",
+        "host_status": "inventory-verified",
+        "building_id": 6481,
+        "data_path": "Dataset/processed/building_6481",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-04",
+        "physical_pi_id": "node-55",
+        "host_status": "inventory-verified",
+        "building_id": 6482,
+        "data_path": "Dataset/processed/building_6482",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      }
+    ],
+    "8": [
+      {
+        "logical_client_id": "client-01",
+        "physical_pi_id": "node-52",
+        "host_status": "inventory-verified",
+        "building_id": 6479,
+        "data_path": "Dataset/processed/building_6479",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-02",
+        "physical_pi_id": "node-53",
+        "host_status": "inventory-verified",
+        "building_id": 6480,
+        "data_path": "Dataset/processed/building_6480",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-03",
+        "physical_pi_id": "node-54",
+        "host_status": "inventory-verified",
+        "building_id": 6481,
+        "data_path": "Dataset/processed/building_6481",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-04",
+        "physical_pi_id": "node-55",
+        "host_status": "inventory-verified",
+        "building_id": 6482,
+        "data_path": "Dataset/processed/building_6482",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-05",
+        "physical_pi_id": "node-56",
+        "host_status": "candidate-unverified",
+        "building_id": 6483,
+        "data_path": "Dataset/processed/building_6483",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-06",
+        "physical_pi_id": "node-57",
+        "host_status": "candidate-unverified",
+        "building_id": 6484,
+        "data_path": "Dataset/processed/building_6484",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-07",
+        "physical_pi_id": "node-58",
+        "host_status": "candidate-unverified",
+        "building_id": 6485,
+        "data_path": "Dataset/processed/building_6485",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-08",
+        "physical_pi_id": "node-59",
+        "host_status": "candidate-unverified",
+        "building_id": 6486,
+        "data_path": "Dataset/processed/building_6486",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      }
+    ],
+    "17": [
+      {
+        "logical_client_id": "client-01",
+        "physical_pi_id": "node-52",
+        "host_status": "inventory-verified",
+        "building_id": 6479,
+        "data_path": "Dataset/processed/building_6479",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-02",
+        "physical_pi_id": "node-53",
+        "host_status": "inventory-verified",
+        "building_id": 6480,
+        "data_path": "Dataset/processed/building_6480",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-03",
+        "physical_pi_id": "node-54",
+        "host_status": "inventory-verified",
+        "building_id": 6481,
+        "data_path": "Dataset/processed/building_6481",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-04",
+        "physical_pi_id": "node-55",
+        "host_status": "inventory-verified",
+        "building_id": 6482,
+        "data_path": "Dataset/processed/building_6482",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-05",
+        "physical_pi_id": "node-56",
+        "host_status": "candidate-unverified",
+        "building_id": 6483,
+        "data_path": "Dataset/processed/building_6483",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-06",
+        "physical_pi_id": "node-57",
+        "host_status": "candidate-unverified",
+        "building_id": 6484,
+        "data_path": "Dataset/processed/building_6484",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-07",
+        "physical_pi_id": "node-58",
+        "host_status": "candidate-unverified",
+        "building_id": 6485,
+        "data_path": "Dataset/processed/building_6485",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-08",
+        "physical_pi_id": "node-59",
+        "host_status": "candidate-unverified",
+        "building_id": 6486,
+        "data_path": "Dataset/processed/building_6486",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-09",
+        "physical_pi_id": "node-60",
+        "host_status": "candidate-unverified",
+        "building_id": 6487,
+        "data_path": "Dataset/processed/building_6487",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-10",
+        "physical_pi_id": "node-61",
+        "host_status": "candidate-unverified",
+        "building_id": 6488,
+        "data_path": "Dataset/processed/building_6488",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-11",
+        "physical_pi_id": "node-62",
+        "host_status": "candidate-unverified",
+        "building_id": 6489,
+        "data_path": "Dataset/processed/building_6489",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-12",
+        "physical_pi_id": "node-63",
+        "host_status": "candidate-unverified",
+        "building_id": 6490,
+        "data_path": "Dataset/processed/building_6490",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-13",
+        "physical_pi_id": "node-64",
+        "host_status": "candidate-unverified",
+        "building_id": 6491,
+        "data_path": "Dataset/processed/building_6491",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-14",
+        "physical_pi_id": "node-65",
+        "host_status": "candidate-unverified",
+        "building_id": 6492,
+        "data_path": "Dataset/processed/building_6492",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-15",
+        "physical_pi_id": "node-66",
+        "host_status": "candidate-unverified",
+        "building_id": 6493,
+        "data_path": "Dataset/processed/building_6493",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-16",
+        "physical_pi_id": "node-67",
+        "host_status": "candidate-unverified",
+        "building_id": 6494,
+        "data_path": "Dataset/processed/building_6494",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      },
+      {
+        "logical_client_id": "client-17",
+        "physical_pi_id": "node-68",
+        "host_status": "candidate-unverified",
+        "building_id": 6495,
+        "data_path": "Dataset/processed/building_6495",
+        "expected_samples": {"train": 203, "validation": 59, "test": 45}
+      }
+    ]
+  }
+}
